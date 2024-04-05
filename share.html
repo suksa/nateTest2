@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="러블리즈 단체로 놀뭐 나와서 각자 별명 말해주는 시간저는 핵주먹  저는 빵떡   저는 고라니  ♡ 저는 꽃이요 ♡  ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 또 못 참고 과거로 돌아감ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ케이랑 유재석 사이엔 어떤 일이">
+    <meta property="og:title" content="모임 하러가요2" />
+    <meta property="og:image" content="https://thumb.pann.com/tc_240x152/https://fimg5.pann.com/new/download.jsp?FileID=67554129" />
+    <meta property="og:description" content="러블리즈 단체로 놀뭐 나와서 각자 별명 말해주는 시간저는 핵주먹  저는 빵떡   저는 고라니  ♡ 저는 꽃이요 ♡  ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 또 못 참고 과거로 돌아감ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ케이랑 유재석 사이엔 어떤 일이" />
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"> <!-- 상단 배너 -->
+    <title>모임 하러가요2</title>
+</head>
+<body>
+    <h2>공유페이지</h2>
+    <p>모임상세 or 콘텐츠상세</p>
+    <button type="button" style="display: none" id="goApp">앱으로 보기</button>
+    <button type="button" style="display: none" id="goDown">qr링크</button>
+
+    <script>
+        var aos = {
+            intentScheme: 'intent://meetdetail/5kLDQoqn5#Intent;scheme=meetup;package=com.skcomms.android.ppazl;end;',
+            storeLink: 'https://play.google.com/store/apps/details?id=com.skcomms.android.ppazl'
+        }
+        var ios = {
+            uniLink: '{universal link}',
+            storeLink: 'http://itunes.apple.com/kr/app/{app}/{id}',
+        }
+        var qrLink = './qr.html'
+
+        var device = checkDevice();
+
+        if (device === 'android') {
+            aosFunc()
+        } else if (device === 'ios') {
+            iosFunc()
+        } else if (device === 'pc') {
+            otherFunc()
+        } else if (device === 'other') {
+            otherFunc()
+        }
+
+        function checkDevice() {
+            var ua = navigator.userAgent.toLowerCase();
+            var androidPattern = /android/i;
+            var tabletPattern = /tablet/i;
+            var iPhonePattern = /iphone/i;
+            var desktopPattern = /windows|macintosh|linux/i;
+
+            if (androidPattern.test(ua) && !tabletPattern.test(ua)) {
+                return "android";
+            } else if (iPhonePattern.test(ua)) {
+                return "ios";
+            } else if (desktopPattern.test(ua)) {
+                return "pc";
+            } else {
+                return 'other';
+            }
+        }
+
+        function aosFunc() {
+            function goAppWithFailedCallback(redirectFailedCallback) {
+                if (typeof redirectFailedCallback !== 'function') {
+                    redirectFailedCallback = function () { };
+                }
+                var startTime = new Date().getTime();
+                let timeout = null;
+                function cancelTimeout() {
+                    if (timeout) clearTimeout(timeout);
+                    timeout = null;
+                }
+                timeout = setTimeout(function () {
+                    window.removeEventListener('blur', cancelTimeout);
+                    const currTime = new Date().getTime();
+                    if (currTime - startTime < 1000) {
+                        redirectFailedCallback();
+                    }
+                }, 500);
+                window.addEventListener('blur', cancelTimeout, { once: true });
+                setTimeout(function () {
+                    location.href = aos.intentScheme;
+                }, 32);
+            }
+
+            var elGoApp = document.querySelector('#goApp')
+            elGoApp.style.display = 'block'
+
+            elGoApp.addEventListener('click', function () {
+                goAppWithFailedCallback(function () {
+                    location.href = aos.storeLink;
+                });
+            })
+        }
+
+        function iosFunc() {
+            var elGoApp = document.querySelector('#goApp')
+            elGoApp.style.display = 'block'
+
+            elGoApp.addEventListener('click', function () {
+                location.href = uniLink;
+            })
+        }
+
+        function otherFunc() {
+            var elGoDown = document.querySelector('#goDown')
+            elGoDown.style.display = 'block'
+
+            elGoDown.addEventListener('click', function () {
+                location.href = qrLink;
+            })
+        }
+    </script>
+</body>
+</html>
