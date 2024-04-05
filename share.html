@@ -14,7 +14,12 @@
     <h2>공유페이지</h2>
     <p>모임상세 or 콘텐츠상세</p>
     <button type="button" style="display: none" id="goApp">앱으로 보기</button>
-    <button type="button" style="display: none" id="goDown">qr링크</button>
+    <img src="./qr.jpg" alt="">
+    <div style="display: none" id="other">
+        <a href="./">앱스토어 링크</a> | 
+        <a href="./">플레이스토어 링크</a>
+         (링크없음) qr은 ./qr.html 링크로 생성된 qr코드입니다
+    </div>
 
     <script>
         var aos = {
@@ -101,12 +106,8 @@
         }
 
         function otherFunc() {
-            var elGoDown = document.querySelector('#goDown')
-            elGoDown.style.display = 'block'
-
-            elGoDown.addEventListener('click', function () {
-                location.href = qrLink;
-            })
+            var elOther = document.querySelector('#other')
+            elOther.style.display = 'block'
         }
     </script>
 </body>
