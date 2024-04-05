@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        var aos = {
+            storeLink: 'https://play.google.com/store/apps/details?id=com.skcomms.android.ppazl'
+        }
+        var ios = {
+            storeLink: 'http://itunes.apple.com/kr/app/kupang-coupang/id454434967?mt=8',
+        }
+        var otherLink = './intro.html';
+
+        var device = checkDevice();
+
+        if (device === 'android') {
+            aosFunc()
+        } else if (device === 'ios') {
+            iosFunc()
+        } else if (device === 'pc') {
+            otherFunc()
+        } else if (device === 'other') {
+            otherFunc()
+        }
+
+        function checkDevice() {
+            var ua = navigator.userAgent.toLowerCase();
+            var androidPattern = /android/i;
+            var tabletPattern = /tablet/i;
+            var iPhonePattern = /iphone/i;
+            var desktopPattern = /windows|macintosh|linux/i;
+
+            if (androidPattern.test(ua) && !tabletPattern.test(ua)) {
+                return "android";
+            } else if (iPhonePattern.test(ua)) {
+                return "ios";
+            } else if (desktopPattern.test(ua)) {
+                return "pc";
+            } else {
+                return 'other';
+            }
+        }
+
+        function aosFunc() {
+            setTimeout(function () {
+                location.href = aos.storeLink;
+            }, 100);
+        }
+
+        function iosFunc() {
+            setTimeout(function () {
+                location.href = ios.storeLink;
+            }, 100);
+        }
+
+        function otherFunc() {
+            location.href = otherLink;
+        }
+    </script>
+</body>
+
+</html>
