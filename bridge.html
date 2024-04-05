@@ -11,9 +11,7 @@
 <body>
     <script>
         var redirectUrl = './share.html';
-        var aos = {
-            intentScheme: 'intent://meetdetail/5kLDQoqn5#Intent;scheme=meetup;package=com.skcomms.android.ppazl;end;',
-        }
+        var urlScheme = 'meetup://meetdetail/5kLDQrZVDXB8V'
 
         var initialTime = new Date().getTime();
         var device = checkDevice();
@@ -66,7 +64,7 @@
                 }, 500);
                 window.addEventListener('blur', cancelTimeout, { once: true });
                 setTimeout(function () {
-                    location.href = aos.intentScheme;
+                    location.href = urlScheme;
                 }, 32);
             }
 
