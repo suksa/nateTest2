@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="모임 하러가요" />
+    <meta property="og:image" content="https://thumb.pann.com/tc_240x152/https://fimg5.pann.com/new/download.jsp?FileID=67554129" />
+    <meta property="og:description" content="러블리즈 단체로 놀뭐 나와서 각자 별명 말해주는 시간저는 핵주먹  저는 빵떡   저는 고라니  ♡ 저는 꽃이요 ♡  ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 또 못 참고 과거로 돌아감ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ케이랑 유재석 사이엔 어떤 일이" />
+    <title>모임 하러가요2</title>
+</head>
+<body>
+    <script>
+        var redirectUrl = './share.html';
+        var aos = {
+            intentScheme: 'intent://meetdetail/5kLDQoqn5#Intent;scheme=meetup;package=com.skcomms.android.ppazl;end;',
+        }
+
+        var initialTime = new Date().getTime();
+        var device = checkDevice();
+
+        if (device === 'android') {
+            aosFunc()
+        } else if (device === 'ios') {
+            location.href = redirectUrl;
+        } else if (device === 'pc') {
+            location.href = redirectUrl;
+        } else if (device === 'other') {
+            location.href = redirectUrl;
+        }
+
+        function checkDevice() {
+            var ua = navigator.userAgent.toLowerCase();
+            var androidPattern = /android/i;
+            var tabletPattern = /tablet/i;
+            var iPhonePattern = /iphone/i;
+            var desktopPattern = /windows|macintosh|linux/i;
+
+            if (androidPattern.test(ua) && !tabletPattern.test(ua)) {
+                return "android";
+            } else if (iPhonePattern.test(ua)) {
+                return "ios";
+            } else if (desktopPattern.test(ua)) {
+                return "pc";
+            } else {
+                return 'other';
+            }
+        }
+
+        function aosFunc() {
+            function goAppWithFailedCallback(redirectFailedCallback) {
+                if (typeof redirectFailedCallback !== 'function') {
+                    redirectFailedCallback = function () { };
+                }
+                var startTime = new Date().getTime();
+                let timeout = null;
+                function cancelTimeout() {
+                    if (timeout) clearTimeout(timeout);
+                    timeout = null;
+                }
+                timeout = setTimeout(function () {
+                    window.removeEventListener('blur', cancelTimeout);
+                    const currTime = new Date().getTime();
+                    if (currTime - startTime < 1000) {
+                        redirectFailedCallback();
+                    }
+                }, 500);
+                window.addEventListener('blur', cancelTimeout, { once: true });
+                setTimeout(function () {
+                    location.href = aos.intentScheme;
+                }, 32);
+            }
+
+            goAppWithFailedCallback(function () {
+                location.href = redirectUrl;
+            });
+        }
+    </script>
+</body>
+</html>
