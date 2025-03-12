@@ -12,20 +12,31 @@ var com = {};
 com.nateon = {};
 com.nateon.talk = {};
 
-com.nateon.talk.NateonShare = function(title, desc, thimg, href, srclink, memo, ver, applist, appname, appid, appver) {
-
+com.nateon.talk.NateonShare = function(title, desc, thimg, href) {
     if (!document.querySelector("#__nateonshare")) {
         let iframe = document.createElement("iframe");
         iframe.id = "__nateonshare";
         iframe.style.display = "none";
         document.body.appendChild(iframe);
     }
+
+    var applist = new AppList([
+         { os:"ios", devicetype:"phone", installurl:"", executeurl:"" },
+         { os:"android", devicetype:"none", installurl:"", executeurl:"" }
+    ])
+
+    var appid = ''
+    var appver = ''
+    var appname = '네이트'
+    var ver = '1.0'
+    var memo = ''
+    var link = href
     
     this.title = encodeURIComponent(title);
     this.desc = encodeURIComponent(desc);
     this.thimg = encodeURIComponent(thimg);
-    this.href = encodeURIComponent(href);
-    this.srclink = encodeURIComponent(srclink);
+    this.href = encodeURIComponent(link);
+    this.srclink = encodeURIComponent(link);
     this.memo = encodeURIComponent(memo);
     this.ver = encodeURIComponent(ver);
     this.appid = encodeURIComponent(appid);
@@ -109,11 +120,12 @@ function AppList(applist) {
 
 
 
+
     const applist = new AppList([{os:"ios", devicetype:"phone", installurl:"", executeurl:""}, {os:"android", devicetype:"none", installurl:"", executeurl:""}])
     
 function aa() {
-const link = new com.nateon.talk.NateonShare('제목', '내용', 'https://test999.nate.com:5500/assets/img/empty_01@2x.png', '링크', '링크', '', '1.0', applist, '네이트')
-link.execute()
+const link = new com.nateon.talk.NateonShare('제목', '내용', 'https://news.nateimg.co.kr/etc/cms/2025/03/12/1741766136_565.jpg', 'https://nate.com')
+        link.execute()
 }
 </script>
 </body>
