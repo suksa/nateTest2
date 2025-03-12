@@ -50,7 +50,8 @@ com.nateon.talk.NateonShare.prototype.execute = function(callback) {
             .append("&ver=").append(this.ver)
             .append("&appver=").append(this.appver)
             .append("&appid=").append(this.appid)
-            .append("&appname=").append(this.appname);
+            .append("&appname=").append(this.appname)
+            .append("&end=");
     
     if (userAgent.includes("android")) {
         if (userAgent.includes("chrome")) {
