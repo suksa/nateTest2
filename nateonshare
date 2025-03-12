@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onClick="aa()">btn</button>
+    <script>
+var com = {};
+com.nateon = {};
+com.nateon.talk = {};
+
+com.nateon.talk.NateonShare = function(title, desc, thimg, href, srclink, memo, ver, appid, appver, appname, applist) {
+    if (!document.querySelector("#__nateonshare")) {
+        let iframe = document.createElement("iframe");
+        iframe.id = "__nateonshare";
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+    }
+    
+    this.title = encodeURIComponent(title);
+    this.desc = encodeURIComponent(desc);
+    this.thimg = encodeURIComponent(thimg);
+    this.href = encodeURIComponent(href);
+    this.srclink = encodeURIComponent(srclink);
+    this.memo = encodeURIComponent(memo);
+    this.ver = encodeURIComponent(ver);
+    this.appid = encodeURIComponent(appid);
+    this.appver = encodeURIComponent(appver);
+    this.appname = encodeURIComponent(appname);
+    this.applist = encodeURIComponent(JSON.NateOnStringify(applist));
+    
+    if (this.isEmptyString(this.title) || this.isEmptyString(this.srclink)) {
+        throw new Error("IllegalArgumentException");
+    }
+};
+
+com.nateon.talk.NateonShare.prototype.execute = function(callback) {
+    var userAgent = navigator.userAgent.toLowerCase();
+    var msgParam = new com.nateon.talk.StringBuilder("link");
+    msgParam.append("?thimg=").append(this.thimg)
+            .append("&title=").append(this.title)
+            .append("&desc=").append(this.desc)
+            .append("&href=").append(this.href)
+            .append("&srclink=").append(this.srclink)
+            .append("&memo=").append(this.memo)
+            .append("&ver=").append(this.ver)
+            .append("&appver=").append(this.appver)
+            .append("&appid=").append(this.appid)
+            .append("&appname=").append(this.appname);
+    
+    if (userAgent.includes("android")) {
+        if (userAgent.includes("chrome")) {
+            window.location = "intent://" + msgParam.toString() + "/#Intent;scheme=nateonuc;package=Uxpp.UC;end;";
+        } else {
+            document.querySelector("#__nateonshare").src = "nateonuc://" + msgParam.toString();
+            document.querySelector("#__nateonshare").onload = function() {
+                window.location = "https://br.nate.com/index.php?code=A092";
+            };
+        }
+    } else if (userAgent.includes("iphone")) {
+        var clickedAt = Date.now();
+        setTimeout(() => {
+            if (Date.now() - clickedAt < 2000) {
+                if (typeof callback === 'function') {
+                    callback();
+                } else {
+                    document.querySelector("#__nateonshare").src = "https://itunes.apple.com/kr/app/nateon/id362693357?mt=8";
+                }
+            }
+        }, 1500);
+        window.location = "nateonuc://" + msgParam.toString();
+    }
+};
+
+com.nateon.talk.NateonShare.prototype.isEmptyString = function(str) {
+    return str.trim().length === 0;
+};
+
+com.nateon.talk.StringBuilder = function(value) {
+    this.strings = [];
+    if (value) this.append(value);
+};
+
+com.nateon.talk.StringBuilder.prototype.append = function(value) {
+    if (value) this.strings.push(value);
+    return this;
+};
+
+com.nateon.talk.StringBuilder.prototype.toString = function() {
+    return this.strings.join("");
+};
+
+JSON.NateOnStringify = JSON.NateOnStringify || function(obj) {
+    if (typeof obj !== "object" || obj === null) {
+        return JSON.stringify(obj);
+    }
+    return JSON.stringify(obj);
+};
+
+function AppList(applist) {
+    this.applist = applist;
+}
+
+
+
+
+    const applist = new AppList([{os:"ios", devicetype:"phone", installurl:"", executeurl:""}, {os:"android", devicetype:"none", installurl:"", executeurl:""}])
+    
+function aa() {
+const link = new com.nateon.talk.NateonShare('제목', '내용', 'https://test999.nate.com:5500/assets/img/empty_01@2x.png', '링크', '링크', '', '1.0', applist, '네이트')
+link.execute()
+</script>
+</body>
+</html>
