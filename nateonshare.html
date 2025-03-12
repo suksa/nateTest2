@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>2
+<body>3
     <button onClick="aa()">btn</button>
     <script>
 var com = {};
@@ -124,8 +124,7 @@ function AppList(applist) {
     const applist = new AppList([{os:"ios", devicetype:"phone", installurl:"", executeurl:""}, {os:"android", devicetype:"none", installurl:"", executeurl:""}])
     
 function aa() {
-const link = new com.nateon.talk.NateonShare('제목', '내용', 'https://news.nateimg.co.kr/etc/cms/2025/03/12/1741766136_565.jpg', 'https://nate.com')
-        link.execute()
+    new com.nateon.talk.NateonShare('제목2', '내용', 'https://news.nateimg.co.kr/etc/cms/2025/03/12/1741766136_565.jpg', 'https://nate.com').execute()
 }
 </script>
 </body>
