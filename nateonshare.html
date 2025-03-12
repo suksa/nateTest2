@@ -12,7 +12,8 @@ var com = {};
 com.nateon = {};
 com.nateon.talk = {};
 
-com.nateon.talk.NateonShare = function(title, desc, thimg, href, srclink, memo, ver, appid, appver, appname, applist) {
+com.nateon.talk.NateonShare = function(title, desc, thimg, href, srclink, memo, ver, applist, appname, appid, appver) {
+
     if (!document.querySelector("#__nateonshare")) {
         let iframe = document.createElement("iframe");
         iframe.id = "__nateonshare";
